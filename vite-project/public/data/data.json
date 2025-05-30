@@ -1,0 +1,19 @@
+[{
+    "user": {
+            "username": "Brian",
+            "role": "Ojeda"
+    },
+    "products": [{
+        "id": 1,
+        "img": "http://localhost:5173/img/correa.jpg",
+        "name": "Collar y correa",
+        "price": "10000",
+        "stock": 10
+    },{
+        "id": 2,
+        "img": "http://localhost:5173/img/comedero.jpg",
+        "name": "Comedero",
+        "price": "2000",
+        "stock": 10
+    }]
+}]
