@@ -1,11 +1,11 @@
 import HEADER from "./header";
 import FOOTER from "./footer";
 
-const CONTAINER = ({cart,children,deleteProduct})=>{
+const CONTAINER = ({children})=>{
 
     return (
         <>
-         <HEADER cartItems={cart} deleteProduct={deleteProduct} />
+         <HEADER />
             <div className="container">
                 {children}
             </div>

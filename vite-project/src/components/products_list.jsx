@@ -1,18 +1,29 @@
+import { useContext } from "react";
 import PRODUCTS from "./products";
+import { CartContext } from "../context/CartContext";
+import { SECTION } from "../constant/constant";
 
-const PRODUCTS_LIST = ({products, addCart})=>{
+const PRODUCTS_LIST = ({isPage = false})=>{
 
+
+    const {products} = useContext(CartContext);
+
+    const productsView = isPage?products:
+                                products
+                                .filter(f=>f.section==SECTION.GALLERY_PRODUCT_HOME);
     return (
         <>
-            <h2 className="display-4">Galeria de productos</h2>
+        <br />
+            <h2 className="display-4">GALERIA DE PRODUCTOS</h2>
            <br />
             <section>
                  <div className="row row-cols-1 row-cols-md-3 g-4">
                     {
-                        products.map(product=>{
+                        productsView                       
+                        .map(product=>{
                             return (
                                 <div key={'div_product_' + product.id} className="col">
-                                    <PRODUCTS addCart={addCart} key={product.id} product={product} />
+                                    <PRODUCTS key={product.id} product={product} />
                                 </div>
                             );
                         })

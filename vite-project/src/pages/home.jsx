@@ -1,12 +1,18 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import PRODUCTS_LIST from "../components/products_list";
 import CONTAINER from "../components/static/container";
 import SPINNER from "../components/static/spinner";
 import  "./home.css";
+import { CartContext } from "../context/CartContext";
 
-const HOME = ({cart, products, loading, addCart,deleteProduct}) => {
+const HOME = () => {
+
+    const {loading} = useContext(CartContext);
+    
     return (
         <>
-           <CONTAINER cart={cart} deleteProduct={deleteProduct}>
+           <CONTAINER >
                 <main>
                     <div className="container-title">
                         <h1 className="display-3">BIENVENIDOS A PETSHOP-NACHO</h1> 
@@ -14,8 +20,16 @@ const HOME = ({cart, products, loading, addCart,deleteProduct}) => {
                     </div>
                                        
                     {
-                        loading? <SPINNER/> : <PRODUCTS_LIST addCart={addCart} products={products} />
+                        loading? <center><SPINNER/> </center> : 
+                        (<PRODUCTS_LIST  />
+                            
+                        )
                     }
+                    <br />
+                    {
+                        !loading && <center><Link to='/products'  className='nav-link'>Ver mas...</Link></center>
+                    }
+                    
                 </main>    
            </CONTAINER>                       
         </>

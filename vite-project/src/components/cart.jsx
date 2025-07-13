@@ -1,6 +1,12 @@
 import './cart.css';
+import {useContext} from 'react';
+import {CartContext} from './../context/CartContext'
+import { COLOR_PETSHOP } from '../constant/constant';
 
-const CART = ({cartItems, isOpen, onClose,deleteProduct})=>{
+const CART = ({isOpen, onClose})=>{
+
+    const {cart,handleDeleteFromCart,clearCart} = useContext(CartContext);
+
     return (
         <div className={`cart-drawer ${isOpen? 'open' : ''}`}>
             <div className="cart-header">
@@ -8,22 +14,40 @@ const CART = ({cartItems, isOpen, onClose,deleteProduct})=>{
                 <button onClick={onClose} className="close-button">X</button>
             </div>
             <div className="cart-content">
-                {cartItems.length===0 ? 
+                {cart.length===0 ? 
                     (<p style={{color: 'red'}}>El carrito esta vacia</p>): 
                     (<ul className="cart-item">
-                        {cartItems.map((item,index)=>(
+                        {cart.map((item,index)=>(
                             <>
-                                <li key={'li_cart_' + item.id} style={{color: "black"}}>
-                                    {item.name} - {item.price}
-                                    <button key={'button_cart_' + item.id} onClick={()=>deleteProduct(item)}>eliminar<i className="fa-solid fa-trash"></i></button>
-                                </li>
+                                <div className='row'>
+                                    <div className="col-6">
+                                        <label>{item.name}: {item.price} | cantidad: {item.quantity}</label>
+                                    </div>
+                                    <div className='col-6'>
+                                            <button 
+                                                className='btn btn-danger bg-danger' 
+                                                key={'button_cart_' + item.id} 
+                                                onClick={()=>handleDeleteFromCart(item)}>eliminar<i className="fa-solid fa-trash"></i>
+                                            </button>
+                                    </div>
+                                </div>
+                                <br />
                             </>
                             ))
                         }
                     </ul>)
                 }
             </div>
-
+            <div className='cart-footer'>
+                 {cart.length>0 && 
+                        (<center>
+                            <button 
+                                style={{ backgroundColor: COLOR_PETSHOP,margin: '10px'}} 
+                                className='btn' onClick={clearCart}>Finalizar compra
+                            </button>
+                        </center>)
+                }
+            </div>
         </div>
     );
 }

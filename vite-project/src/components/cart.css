@@ -2,7 +2,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    width: 100px;
+    width: 30rem;
     height: 100%;
     background: white;
   
@@ -25,7 +25,8 @@
     background-color: #f9f9f9;
 }
 .cart-content{
-    padding: 16px;
+    padding: 0px;
+    padding-top: 5%;
 }
 .close-button{
     background: none;

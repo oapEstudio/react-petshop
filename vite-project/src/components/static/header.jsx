@@ -1,11 +1,27 @@
-import { Link } from "react-router-dom";
-import React, {useState} from "react";
+import { Link,useNavigate } from "react-router-dom";
+import React, {useState, useContext} from "react";
+
 import logo from "./../../assets/logo.jpg";
+import Market from "./../../../public/img/store-solid.svg";
 import CART from "../cart";
-const HEADER = ({cartItems,deleteProduct})=>{
+import { CartContext } from "../../context/CartContext";
+
+const HEADER = ({isAdmin = false})=>{
 
     const LOGO = logo;
     const [isCartOpen, setCartOpen] = useState(false);
+    const navigate = useNavigate();
+    const { setIsAuth } = useContext(CartContext)
+    const styleButtonMarket = {
+        width: '20px'
+    }
+
+    const exit = ()=>{
+
+        localStorage.setItem('isAuth',false);
+        setIsAuth(false)
+        navigate('/');
+    }
 
     return (
         <header>
@@ -27,13 +43,27 @@ const HEADER = ({cartItems,deleteProduct})=>{
                         <li className="nav-item"><Link to='/about' className='nav-link'>Sobre nosotros</Link></li>
                         <li className="nav-item"><Link to='/products' className='nav-link'>Galeria de productos</Link></li>
                         <li className="nav-item"><Link to='/contacts' className='nav-link'>Contactos</Link></li>                                                       
+                        {isAdmin && (
+                                <li className="nav-item"><Link to='/admin' className='nav-link'>Administrador</Link></li>                                                       
+                        )}
                     </ul>
-                    <div>
-                        <button onClick={()=>setCartOpen(true)}></button>
-                        <CART deleteProduct={deleteProduct} cartItems={cartItems} isOpen={isCartOpen} onClose={()=>
-                            setCartOpen(false)
-                        }/>
-                    </div>
+                    {!isAdmin && (
+
+                        <div>
+                            <button className="btn" onClick={()=>setCartOpen(true)}>
+                                <img src={Market} alt="Market" style={styleButtonMarket} />
+                            </button>
+                            <CART isOpen={isCartOpen} onClose={()=>
+                                setCartOpen(false)
+                            }/>
+                        </div>
+                    )}
+                    {isAdmin && (
+
+                        <div>
+                            <button className="btn" onClick={exit}>Salir</button>
+                        </div>
+                    )}
                 </div>
             </div>
               

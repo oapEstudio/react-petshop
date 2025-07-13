@@ -1,0 +1,60 @@
+ 
+.main {
+    width: 100%;
+    height: 100%;
+}
+
+.containerA {
+    margin-top: 20%;
+    text-align: center;
+}
+
+.containerB {
+    margin-top: 25%;
+    text-align: center;
+}
+
+.main .introLeft {
+    background-color: #98d9b6;
+    width: 50%;
+    height: 700px;
+    float: left;
+}
+
+    .main .introLeft h1 {
+        font-size: 1.5rem;
+        color: #fff;
+    }
+
+    .main .introLeft h3 {
+        font-size: 1rem;
+        color: #fff;
+    }
+
+
+.main .introRight {
+    background-color: #fff;
+    width: 50%;
+    height: 100%;
+    float: right;
+}
+
+    .main .introRight h1 {
+        font-size: 1.5rem;
+        color: #747474;
+    }
+
+    .main .introRight .containerB button {
+        margin-top: 4%;
+        background-color: #b9dcff;
+        color: #066f96;
+    }
+
+img.logo{
+    width: 30%;
+}
+
+.footerLogin{
+    position: absolute;
+    bottom: 1px;
+}
