@@ -6,12 +6,12 @@ import Market from "./../../../public/img/store-solid.svg";
 import CART from "../cart";
 import { CartContext } from "../../context/CartContext";
 
-const HEADER = ({isAdmin = false})=>{
+const HEADER = ()=>{
 
     const LOGO = logo;
     const [isCartOpen, setCartOpen] = useState(false);
     const navigate = useNavigate();
-    const { setIsAuth } = useContext(CartContext)
+    const { setIsAuth,isAuthenticated } = useContext(CartContext)
     const styleButtonMarket = {
         width: '20px'
     }
@@ -43,11 +43,11 @@ const HEADER = ({isAdmin = false})=>{
                         <li className="nav-item"><Link to='/about' className='nav-link'>Sobre nosotros</Link></li>
                         <li className="nav-item"><Link to='/products' className='nav-link'>Galeria de productos</Link></li>
                         <li className="nav-item"><Link to='/contacts' className='nav-link'>Contactos</Link></li>                                                       
-                        {isAdmin && (
-                                <li className="nav-item"><Link to='/admin' className='nav-link'>Administrador</Link></li>                                                       
-                        )}
+                     
+                        <li className="nav-item"><Link to='/admin' className='nav-link'>Administrador</Link></li>                                                       
+                        
                     </ul>
-                    {!isAdmin && (
+                    {!isAuthenticated && (
 
                         <div>
                             <button className="btn" onClick={()=>setCartOpen(true)}>
@@ -58,7 +58,7 @@ const HEADER = ({isAdmin = false})=>{
                             }/>
                         </div>
                     )}
-                    {isAdmin && (
+                    {isAuthenticated && (
 
                         <div>
                             <button className="btn" onClick={exit}>Salir</button>
